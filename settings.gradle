@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "JsBridgeKt"
 include ':app'
+include ':jsbridgekt'

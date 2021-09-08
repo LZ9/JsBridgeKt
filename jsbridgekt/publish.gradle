@@ -11,8 +11,8 @@ task androidSourcesJar(type: Jar) {
 
 ext {path=
     PUBLISH_GROUP_ID = 'ink.lodz'
-    PUBLISH_ARTIFACT_ID = 'JsBridgeKt'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_ARTIFACT_ID = 'jsbridge-kt'
+    PUBLISH_VERSION = '1.0.1'
 }
 
 ext["signing.keyId"] = ''

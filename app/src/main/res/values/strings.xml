@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JsBridgeKt</string>
+
+    <!-- JS交互 -->
+    <string name="js_has_response">JAVA调用WEB（有回调）</string>
+    <string name="js_no_response">JAVA调用WEB（无回调）</string>
 </resources>

@@ -1,12 +1,15 @@
 # JsBridgeKt库
 我尝试将[lzyzsd](https://github.com/lzyzsd)的[JsBridge](https://github.com/lzyzsd/JsBridge)库转为了kotlin版本。内置的交互协议还是一样的，并且和WebView做了解耦，无须固定继承BridgeWebView，你可以自己决定继承Android原生的WebView或者腾讯X5内核的WebView，实现和配置JsBridgeManager即可。
-[English](https://github.com/lzyzsd)    [中文](https://github.com/lzyzsd)
+
+## 语言
+- [English](https://github.com/lzyzsd)
+- [中文](https://github.com/LZ9/JsBridgeKt)
 
 ## 目录
-- [1、引用方式](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#1内部引用)
-- [2、Android端使用方式](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#2appglidemodule实现)
-- [3、JavaScript使用方式](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#3初始化)
-- [扩展](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#扩展)
+- [1、引用方式](https://github.com/LZ9/JsBridgeKt#引用)
+- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt#Android端使用方式)
+- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt#JavaScript使用方式)
+- [扩展](https://github.com/LZ9/JsBridgeKt#扩展)
 
 ## 1、引用方式
 由于jcenter删库跑路，请大家添加mavenCentral依赖
@@ -114,6 +117,8 @@ window.WebViewJavascriptBridge.send(data , function(responseData) {
 
 ## 扩展
 
-- [更新记录](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader_update.md)
+- [更新记录](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
 - [回到顶部](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#imageloader库)
 - [AgileDevKt 主页](https://github.com/LZ9/AgileDevKt)
+- [了解 core-kt](https://github.com/LZ9/AgileDevKt/blob/master/corekt/readme_core.md)
+- [了解 Pandora](https://github.com/LZ9/AgileDevKt/blob/master/pandora/document/readme_pandora.md)

@@ -13,7 +13,7 @@ import com.lodz.android.jsbridgekt.contract.WebViewJavascriptBridge
  * @date 2021/8/23
  */
 @SuppressLint("SetJavaScriptEnabled")
-class SimpleBridgeWebView : WebView, WebViewJavascriptBridge {
+open class SimpleBridgeWebView : WebView, WebViewJavascriptBridge {
 
     private lateinit var mJsBridgeManager :JsBridgeManager
 

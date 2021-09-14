@@ -22,7 +22,7 @@ repositories {
 ```
 在你需要调用的module里的dependencies中加入以下依赖
 ```
-implementation 'ink.lodz:jsbridge-kt:1.0.1'
+implementation 'ink.lodz:jsbridge-kt:1.0.2'
 ```
 
 ## 2、Android端使用方式

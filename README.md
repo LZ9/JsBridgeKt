@@ -6,9 +6,9 @@
 - [中文](https://github.com/LZ9/JsBridgeKt)
 
 ## 目录
-- [1、引用方式](https://github.com/LZ9/JsBridgeKt#引用)
-- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt#Android端使用方式)
-- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt#JavaScript使用方式)
+- [1、引用方式](https://github.com/LZ9/JsBridgeKt#1引用方式)
+- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt#2android端使用方式)
+- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt#3javascript使用方式)
 - [扩展](https://github.com/LZ9/JsBridgeKt#扩展)
 
 ## 1、引用方式
@@ -98,27 +98,9 @@ class CustomWebView : WebView, WebViewJavascriptBridge {
 ```
 
 ## 3、JavaScript使用方式
-请在前端页面需要交互的位置执行下面的逻辑：
-#### 1）发送给app
-指定接口名xxxx将数据data发送给app
-```
-window.WebViewJavascriptBridge.callHandler('xxxx', dada, function(responseData) {
-    // 得到app返回的结果responseData
-});
-```
-数据data发送给app，不指定具体接口名，使用内置默认接口名
-```
-window.WebViewJavascriptBridge.send(data , function(responseData) {
-    // 得到app返回的结果responseData
-});
-```
-#### 2）订阅app来的数据
-参考：
+前端的调用方式可以参考[JsBridge.js](https://github.com/LZ9/JsBridgeKt/blob/master/app/src/main/assets/JsBridge.js)这个文件，里面同样包含了发送和订阅。
 
 ## 扩展
 
 - [更新记录](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
-- [回到顶部](https://github.com/LZ9/AgileDevKt/blob/master/imageloaderkt/readme_imageloader.md#imageloader库)
-- [AgileDevKt 主页](https://github.com/LZ9/AgileDevKt)
-- [了解 core-kt](https://github.com/LZ9/AgileDevKt/blob/master/corekt/readme_core.md)
-- [了解 Pandora](https://github.com/LZ9/AgileDevKt/blob/master/pandora/document/readme_pandora.md)
+- [回到顶部](https://github.com/LZ9/JsBridgeKt#jsbridgekt库)

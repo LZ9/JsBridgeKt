@@ -2,11 +2,12 @@ package com.lodz.android.jsbridgekt
 
 import android.os.Looper
 import android.webkit.WebView
-import com.alibaba.fastjson.JSON
 import com.lodz.android.jsbridgekt.contract.OnBridgeReceiveListener
 import com.lodz.android.jsbridgekt.contract.OnCallBackJsListener
 import com.lodz.android.jsbridgekt.contract.OnReceiveJsListener
 import com.lodz.android.jsbridgekt.contract.WebViewJavascriptBridge
+import org.json.JSONArray
+import org.json.JSONObject
 
 /**
  * @author zhouL
@@ -42,7 +43,14 @@ open class JsBridgeManager(private val webview: WebView) : WebViewJavascriptBrid
 
     /** 发送数据给H5 */
     private fun sendMessageToJs(message: MessageBean) {
-        val json = JSON.toJSONString(message)
+        val jsonObject = JSONObject()
+        jsonObject.put(message.callbackIdKey(), message.callbackId)
+        jsonObject.put(message.dataKey(), message.data)
+        jsonObject.put(message.responseIdKey(), message.responseId)
+        jsonObject.put(message.responseDataKey(), message.responseData)
+        jsonObject.put(message.handlerNameKey(), message.handlerName)
+
+        val json = jsonObject.toString()
             .replace("(\\\\)([^utrn])".toRegex(), "\\\\\\\\$1$2")
             .replace("(?<=[^\\\\])(\")".toRegex(), "\\\\\"")
 
@@ -58,7 +66,7 @@ open class JsBridgeManager(private val webview: WebView) : WebViewJavascriptBrid
         }
         webview.loadUrl(BridgeUtil.JS_FETCH_QUEUE_FROM_JAVA)
         mBridgeReceiveMap[BridgeUtil.getJsBridgeName()] = OnBridgeReceiveListener {
-            val list = JSON.parseArray(it, MessageBean::class.java)
+            val list = parseArray(it)
             if (list.isNullOrEmpty()) {
                 return@OnBridgeReceiveListener
             }
@@ -83,6 +91,22 @@ open class JsBridgeManager(private val webview: WebView) : WebViewJavascriptBrid
                 }
             }
         }
+    }
+
+    private fun parseArray(json: String): ArrayList<MessageBean> {
+        val list = ArrayList<MessageBean>()
+        val jsonArray = JSONArray(json)
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val bean = MessageBean()
+            bean.callbackId = if (jsonObject.has(bean.callbackIdKey())) jsonObject.getString(bean.callbackIdKey()) else ""
+            bean.data = if (jsonObject.has(bean.dataKey())) jsonObject.getString(bean.dataKey()) else ""
+            bean.responseId = if (jsonObject.has(bean.responseIdKey())) jsonObject.getString(bean.responseIdKey()) else ""
+            bean.responseData = if (jsonObject.has(bean.responseDataKey())) jsonObject.getString(bean.responseDataKey()) else ""
+            bean.handlerName = if (jsonObject.has(bean.handlerNameKey())) jsonObject.getString(bean.handlerNameKey()) else ""
+            list.add(bean)
+        }
+        return list
     }
 
     override fun handlerJsReturnData(url: String) {

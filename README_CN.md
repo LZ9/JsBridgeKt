@@ -2,8 +2,8 @@
 我尝试将[lzyzsd](https://github.com/lzyzsd)的[JsBridge](https://github.com/lzyzsd/JsBridge)库转为了kotlin版本。内置的交互协议还是一样的，并且和WebView做了解耦，无须固定继承BridgeWebView，你可以自己决定继承Android原生的WebView或者腾讯X5内核的WebView，实现和配置JsBridgeManager即可。
 
 ## 语言
-- [English](https://github.com/lzyzsd)
-- [中文](https://github.com/LZ9/JsBridgeKt)
+- [English](https://github.com/LZ9/JsBridgeKt)
+- [中文](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md)
 
 ## 目录
 - [1、引用方式](https://github.com/LZ9/JsBridgeKt#1引用方式)

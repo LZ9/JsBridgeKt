@@ -31,11 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    lintOptions {
+    lint {
         abortOnError false
         checkReleaseBuilds false
     }
+    namespace 'com.lodz.android.jsbridgekt'
+
 }
 
 dependencies {

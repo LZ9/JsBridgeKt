@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.*
 import androidx.activity.result.contract.ActivityResultContracts
-import com.alibaba.fastjson.JSON
 import com.lodz.android.corekt.anko.append
 import com.lodz.android.corekt.anko.getColorCompat
 import com.lodz.android.corekt.log.PrintLog
 import com.lodz.android.jsbridgekt.databinding.ActivityMainBinding
 import com.lodz.android.pandora.base.activity.BaseActivity
+import com.lodz.android.pandora.utils.jackson.toJsonString
 import com.lodz.android.pandora.utils.viewbinding.bindingLayout
 import com.lodz.android.pandora.widget.base.TitleBarLayout
 
@@ -76,7 +76,7 @@ class MainActivity : BaseActivity() {
         super.setListeners()
         // JAVA调用WEB（有回调）
         mBinding.callWebResponse.setOnClickListener {
-            val data = JSON.toJSONString(UserBean("1238784791", "qwesdw"))
+            val data = UserBean("1238784791", "qwesdw").toJsonString()
             appendLog("java 发给web ：$data")
             mBinding.webView.send("functionInJs", data) {
                 appendLog("web 响应数据：$it")

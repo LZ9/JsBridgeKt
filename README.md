@@ -7,7 +7,7 @@ Developers can freely choose the native WebView or Tencent X5 core WebView(TBS) 
 - [English](https://github.com/LZ9/JsBridgeKt)
 - [中文](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md)
 
-## 目录
+## Directory
 - [1、How to dependencies](https://github.com/LZ9/JsBridgeKt#1how-to-dependencies)
 - [2、How to use in Android](https://github.com/LZ9/JsBridgeKt#2how-to-use-in-android)
 - [3、How to use in JavaScript](https://github.com/LZ9/JsBridgeKt#3how-to-use-in-javascript)

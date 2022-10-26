@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.lodz.android.jsbridgekt"
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
     }
@@ -74,7 +74,7 @@ android {
 }
 
 dependencies {
-    implementation 'ink.lodz:pandora:2.0.0'
+    implementation 'ink.lodz:pandora:2.0.3'
     implementation project(path: ':jsbridgekt')
 //    implementation 'ink.lodz:jsbridge-kt:1.0.1'
 }

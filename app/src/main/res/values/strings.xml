@@ -2,6 +2,9 @@
     <string name="app_name">JsBridgeKt</string>
 
     <!-- JS交互 -->
-    <string name="js_has_response">JAVA调用WEB（有回调）</string>
-    <string name="js_no_response">JAVA调用WEB（无回调）</string>
+    <string name="js_title_h5">H5</string>
+    <string name="js_title_native">原生</string>
+    <string name="js_send_custom">发消息给web的getAppInfo接口</string>
+    <string name="js_send_def">发消息给web的默认接口</string>
+    <string name="js_clean_log">清空日志</string>
 </resources>

@@ -5,52 +5,82 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:text="@string/js_title_h5"
+        android:textColor="@color/white" />
+
     <com.lodz.android.jsbridgekt.SimpleBridgeWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:text="@string/js_title_native"
+        android:textColor="@color/white" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/color_d9d9d9"
-        android:padding="10dp">
+        android:layout_height="100dp"
+        android:background="@color/color_d9d9d9">
 
         <TextView
             android:id="@+id/result_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/color_ea8380" />
 
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_custom_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/js_send_custom"
+        android:textAllCaps="false"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/call_web_response"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:text="@string/js_has_response"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_def_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/js_send_def"
+        android:textAllCaps="false"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/call_web_unresponse"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:text="@string/js_no_response"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
-
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/clean_log_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/js_clean_log"
+        android:textAllCaps="false"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
 </LinearLayout>

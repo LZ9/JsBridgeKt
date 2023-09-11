@@ -16,58 +16,52 @@
             </xmp>
         </p>
         <p>
-            <input type="text" id="text1" value="admin" />
+            <input type="text" id="account" value="admin" />
         </p>
         <p>
-            <input type="text" id="text2" value="123" />
+            <input type="text" id="pswd" value="123" />
         </p>
         <p>
-            <input type="button" id="enter" value="发消息给Native" onclick="testClick();"
+            <input type="button" id="enter" value="发消息给原生的默认接口" onclick="sendByDef();"
             />
         </p>
         <p>
-            <input type="button" id="enter1" value="调用Native方法" onclick="testClick1();"
+            <input type="button" id="enter1" value="发消息给原生的login接口" onclick="sendByCustom();"
             />
         </p>
+
+        <!--
         <p>
-            <input type="button" id="enter2" value="显示html" onclick="testDiv();" />
+            <input type="button" id="enter2" value="显示html" onclick="showHTML();" />
         </p>
         <p>
             <input type="file" value="打开文件" />
         </p>
+        -->
     </body>
     <script>
-        function testDiv() {
+        function showHTML() {
             bridgeLog(document.getElementsByTagName("html")[0].innerHTML);
         }
 
-        function testClick() {
-            var str1 = document.getElementById("text1").value;
-            var str2 = document.getElementById("text2").value;
+        function sendByDef() {
+            var data = {'param': '中文测试'}
+            var log = "发送给原生：" + JSON.stringify(data)
 
-            //send message to native
-            var data = {id: 1, account: str1, pswd: str2};
-            window.WebViewJavascriptBridge.send(
-                data
-                , function(responseData) {
-                    bridgeLog("repsonseData from java, data = " + responseData);
-                }
-            );
-
+            window.WebViewJavascriptBridge.send(data, function(responseData) {
+                bridgeLog(log + "\n" + "收到原生返回：" + responseData);
+            });
         }
 
-        function testClick1() {
-            var str1 = document.getElementById("text1").value;
-            var str2 = document.getElementById("text2").value;
+        function sendByCustom() {
+            var account = document.getElementById("account").value;
+            var pswd = document.getElementById("pswd").value;
+            var data = {id: 1, account: account, pswd: pswd};
+            var log = "发送给原生：" + JSON.stringify(data)
 
-            //call native method
-            window.WebViewJavascriptBridge.callHandler(
-                'submitFromWeb'
-                , {'param': '中文测试'}
-                , function(responseData) {
-                      bridgeLog("responseData from java, data = " + responseData);
-                }
-            );
+            window.WebViewJavascriptBridge.callHandler('login', data, function(responseData) {
+                bridgeLog(log + "\n" + "收到原生返回：" + responseData);
+            });
         }
 
         function bridgeLog(logContent) {
@@ -90,23 +84,22 @@
 
         connectWebViewJavascriptBridge(function(bridge) {
             bridge.init(function(message, responseCallback) {
-                console.log('JS got a message', message);
-                bridgeLog("web get a message: " + message);
-                var data = {
-                    'Javascript Responds': '消息接收!'
-                };
-
+               var log = "收到原生数据：" + message
+                bridgeLog(log);
                 if (responseCallback) {
-                    console.log('JS responding with', data);
-                    responseCallback(data);
+                    var result = {'code':500,'msg':'fail'};
+                     bridgeLog(log + "\n" + "返回给原生：" + JSON.stringify(result));
+                    responseCallback(result);
                 }
             });
 
-            bridge.registerHandler("functionInJs", function(data, responseCallback) {
-                bridgeLog("data from Java: " + data);
+            bridge.registerHandler("getAppInfo", function(data, responseCallback) {
+                var log = "收到原生数据：" + data
+                bridgeLog(log);
                 if (responseCallback) {
-                    var responseData = "Javascript get User Info";
-                    responseCallback(responseData);
+                    var result = {'code':200,'msg':'success'};
+                    bridgeLog(log + "\n" + "返回给原生：" + JSON.stringify(result));
+                    responseCallback(result);
                 }
             });
         })

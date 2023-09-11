@@ -7,7 +7,10 @@ import android.webkit.*
 import androidx.activity.result.contract.ActivityResultContracts
 import com.lodz.android.corekt.anko.append
 import com.lodz.android.corekt.anko.getColorCompat
+import com.lodz.android.corekt.anko.getVersionCode
+import com.lodz.android.corekt.anko.getVersionName
 import com.lodz.android.corekt.log.PrintLog
+import com.lodz.android.corekt.utils.DateUtils
 import com.lodz.android.jsbridgekt.databinding.ActivityMainBinding
 import com.lodz.android.pandora.base.activity.BaseActivity
 import com.lodz.android.pandora.utils.jackson.toJsonString
@@ -74,30 +77,39 @@ class MainActivity : BaseActivity() {
 
     override fun setListeners() {
         super.setListeners()
-        // JAVA调用WEB（有回调）
-        mBinding.callWebResponse.setOnClickListener {
-            val data = UserBean("1238784791", "qwesdw").toJsonString()
-            appendLog("java 发给web ：$data")
-            mBinding.webView.send("functionInJs", data) {
-                appendLog("web 响应数据：$it")
+
+        mBinding.cleanLogBtn.setOnClickListener {
+            mBinding.resultTv.text = ""
+        }
+
+        mBinding.sendCustomBtn.setOnClickListener {
+            val data = AppInfoBean(getVersionName(), getVersionCode()).toJsonString()
+            val log = "发送给web：$data"
+            appendLog(log)
+            mBinding.webView.send("getAppInfo", data) {
+                appendLog(log.append("\n").append("收到web数据：$it"))
             }
         }
 
-        // JAVA调用WEB（无回调）
-        mBinding.callWebUnresponse.setOnClickListener {
-            val msg = "hello"
-            appendLog("java 发给web ：$msg")
-            mBinding.webView.send(data = msg)
+        mBinding.sendDefBtn.setOnClickListener {
+            val msg = "{\"time\":${DateUtils.getCurrentFormatString(DateUtils.TYPE_4)}}"
+            val log = "java 发给web ：$msg"
+            appendLog(log)
+            mBinding.webView.send(data = msg) {
+                appendLog(log.append("\n").append("收到web数据：$it"))
+            }
         }
 
-        mBinding.webView.register("submitFromWeb") { data, listener ->
-            appendLog("web 发送过来的数据：$data")
-            listener.callbackJs("java get param")
+        mBinding.webView.register("login") { data, listener ->
+            val result = "{\"code\":500,\"msg\":\"fail\"}"
+            appendLog("收到web数据：$data".append("\n").append("返回给web：$result"))
+            listener.callbackJs(result)
         }
 
         mBinding.webView.register { data, listener ->
-            appendLog("web 发送过来的数据：$data")
-            listener.callbackJs("java get user info")
+            val result = "{\"code\":200,\"msg\":\"success\"}"
+            appendLog("收到web数据：$data".append("\n").append("返回给web：$result"))
+            listener.callbackJs(result)
         }
     }
 
@@ -115,10 +127,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun appendLog(log: String) {
-        if (mBinding.resultTv.text.isEmpty()) {
-            mBinding.resultTv.text = log
-            return
-        }
-        mBinding.resultTv.text = log.append("\n").append(mBinding.resultTv.text)
+        mBinding.resultTv.text = log
     }
 }

@@ -24,7 +24,7 @@ repositories {
 ```
 You can add these code in the dependencies(build.gradle)
 ```
-implementation 'ink.lodz:jsbridge-kt:1.0.4'
+implementation 'ink.lodz:jsbridge-kt:1.0.5'
 ```
 
 ## 2、How to use in Android

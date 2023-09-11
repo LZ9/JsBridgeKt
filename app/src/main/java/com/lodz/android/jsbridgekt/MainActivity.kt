@@ -92,10 +92,10 @@ class MainActivity : BaseActivity() {
         }
 
         mBinding.sendDefBtn.setOnClickListener {
-            val msg = "{\"time\":${DateUtils.getCurrentFormatString(DateUtils.TYPE_4)}}"
-            val log = "java 发给web ：$msg"
+            val data = "{\"time\":${DateUtils.getCurrentFormatString(DateUtils.TYPE_4)}}"
+            val log = "发送给web：$data"
             appendLog(log)
-            mBinding.webView.send(data = msg) {
+            mBinding.webView.send(data = data) {
                 appendLog(log.append("\n").append("收到web数据：$it"))
             }
         }

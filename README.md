@@ -1,20 +1,18 @@
-# JsBridgeKt
-I try to refactor [lzyzsd](https://github.com/lzyzsd)的[JsBridge](https://github.com/lzyzsd/JsBridge) to the kotlin. 
-I decoupled BridgeWebView(BridgeWebView extends WebView) and developer don't need to extends BridgeWebView.
-Developers can freely choose the native WebView or Tencent X5 core WebView(TBS) to extends, just implements WebViewJavascriptBridge and create JsBridgeManager object
+# JsBridgeKt库
+我尝试将[lzyzsd](https://github.com/lzyzsd)的[JsBridge](https://github.com/lzyzsd/JsBridge)库转为了kotlin版本。内置的交互协议还是一样的，并且和WebView做了解耦，无须固定继承BridgeWebView，你可以自己决定继承Android原生的WebView或者腾讯X5内核的WebView，实现和配置JsBridgeManager即可。
 
-## Language
-- [English](https://github.com/LZ9/JsBridgeKt)
-- [中文](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md)
+## 语言
+- [中文](https://github.com/LZ9/JsBridgeKt)
+- [English](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md)
 
-## Directory
-- [1、How to dependencies](https://github.com/LZ9/JsBridgeKt#1how-to-dependencies)
-- [2、How to use in Android](https://github.com/LZ9/JsBridgeKt#2how-to-use-in-android)
-- [3、How to use in JavaScript](https://github.com/LZ9/JsBridgeKt#3how-to-use-in-javascript)
-- [Extends](https://github.com/LZ9/JsBridgeKt#extends)
+## 目录
+- [1、引用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#1引用方式)
+- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#2android端使用方式)
+- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#3javascript使用方式)
+- [扩展](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#扩展)
 
-## 1、How to dependencies
-Please add mavenCentral() dependencies, because jcenter() is deprecated
+## 1、引用方式
+由于jcenter删库跑路，请大家添加mavenCentral依赖
 ```
 repositories {
     ...
@@ -22,66 +20,65 @@ repositories {
     ...
 }
 ```
-You can add these code in the dependencies(build.gradle)
+在你需要调用的module里的dependencies中加入以下依赖
 ```
 implementation 'ink.lodz:jsbridge-kt:1.0.5'
 ```
 
-## 2、How to use in Android
-I create a SimpleBridgeWebView extends native WebView and you can use it if you don't need to custom WebView. The usage is as follows:
-#### 1）Use SimpleBridgeWebView in the layout file
+## 2、Android端使用方式
+如果你想要快捷的使用Android原生的WebView来加载页面，我提供了SimpleBridgeWebView，内部实现了JS交互逻辑，使用方法如下：
+#### 1）在布局文件中使用SimpleBridgeWebView
 ```
  <com.lodz.android.jsbridgekt.SimpleBridgeWebView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 ```
-#### 2）Send data to JS
-Assign a API name like xxx to send data to JS
+#### 2）发送给JS
+指定接口名xxxx将数据data发送给js
 ```
 val msg = "12345"
 webView.send("xxxx", msg) {data->
-    // js callback data          
+    // 这里接收JS返回的数据            
 }
 ```
-You can send data to JS by default API name when hasn't custom API name
+数据data发送给js，不指定具体接口名，使用内置默认接口名
 ```
 val msg = "12345"
 webView.send(data = msg)
 ```
-#### 3）Subscribe to data from JS
-Receive data with the custom API name like xxxx sent by JS
+#### 3）订阅JS来的数据
+接收JS发送来的接口名为xxxx的数据
 ```
 webView.register("xxxx") { data, listener ->
-    // js callback data   
-    // listener is callback object,you can send result to JS 
+    // data是JS发送过来的数据
+    // listener是回调对象，可将本次数据的处理结果返回给JS
     listener.callbackJs("app get param")
 }
 ```
-Receive data with the default API name sent by JS
+接收JS发送来的使用内置默认接口名的数据
 ```
 webView.register { data, listener ->
-    // js callback data   
-    // listener is callback object,you can send result to JS 
+    // data是JS发送过来的数据
+    // listener是回调对象，可将本次数据的处理结果返回给JS
     listener.callbackJs("app get param")
 }
 ```
 
 ---
 
-If you want to use JSBridge in your custom WebView, just like this:
+如果你想要自定义自己的WebView，可以使用以下方法来实现JS交互：
 ```
-// Extends your own WebView and implements WebViewJavascriptBridge interface
+// 继承你需要的WebView，实现WebViewJavascriptBridge接口
 class CustomWebView : WebView, WebViewJavascriptBridge {
-    // create a JsBridgeManager object
+    // 声明JsBridgeManager对象
     private lateinit var mJsBridgeManager :JsBridgeManager
     
     init {
-        mJsBridgeManager = JsBridgeManager(this) 
-        webViewClient = BridgeWebViewClient(this) //This step is very important because bridge logic is implemented in BridgeWebViewClient
-        
+        mJsBridgeManager = JsBridgeManager(this) // 对象赋值
+        webViewClient = BridgeWebViewClient(this) //这步非常重要，JS的拦截逻辑是在BridgeWebViewClient里实现的
     }
     
-    // implements WebViewJavascriptBridge function
+    // 实现接口方法
     override fun send(apiName: String, data: String, function: OnCallBackJsListener?) {
         mJsBridgeManager.send(apiName, data, function)
     }
@@ -100,12 +97,13 @@ class CustomWebView : WebView, WebViewJavascriptBridge {
 }
 ```
 
-## 3、How to use in JavaScript
-The Instructions of H5 can refer to the [JsBridge.js](https://github.com/LZ9/JsBridgeKt/blob/master/app/src/main/assets/JsBridge.js), which includes send and subscribe
+## 3、JavaScript使用方式
+前端的调用方式可以参考[JsBridge.js](https://github.com/LZ9/JsBridgeKt/blob/master/app/src/main/assets/JsBridge.js)这个文件，里面同样包含了发送和订阅。
 
-## Extends
-- [Update record](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
-- [Back to the top](https://github.com/LZ9/JsBridgeKt#jsbridgekt)
+## 扩展
+
+- [更新记录](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
+- [回到顶部](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#jsbridgekt库)
 
 ## License
 - [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)

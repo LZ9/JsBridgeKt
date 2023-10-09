@@ -6,10 +6,10 @@
 - [English](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md)
 
 ## 目录
-- [1、引用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#1引用方式)
-- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#2android端使用方式)
-- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#3javascript使用方式)
-- [扩展](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#扩展)
+- [1、引用方式](https://github.com/LZ9/JsBridgeKt#1引用方式)
+- [2、Android端使用方式](https://github.com/LZ9/JsBridgeKt#2android端使用方式)
+- [3、JavaScript使用方式](https://github.com/LZ9/JsBridgeKt#3javascript使用方式)
+- [扩展](https://github.com/LZ9/JsBridgeKt#扩展)
 
 ## 1、引用方式
 由于jcenter删库跑路，请大家添加mavenCentral依赖
@@ -103,7 +103,7 @@ class CustomWebView : WebView, WebViewJavascriptBridge {
 ## 扩展
 
 - [更新记录](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
-- [回到顶部](https://github.com/LZ9/JsBridgeKt/blob/master/README_CN.md#jsbridgekt库)
+- [回到顶部](https://github.com/LZ9/JsBridgeKt#jsbridgekt库)
 
 ## License
 - [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)

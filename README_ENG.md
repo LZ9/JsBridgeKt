@@ -8,10 +8,10 @@ Developers can freely choose the native WebView or Tencent X5 core WebView(TBS) 
 - [English](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md)
 
 ## Directory
-- [1、How to dependencies](https://github.com/LZ9/JsBridgeKt#1how-to-dependencies)
-- [2、How to use in Android](https://github.com/LZ9/JsBridgeKt#2how-to-use-in-android)
-- [3、How to use in JavaScript](https://github.com/LZ9/JsBridgeKt#3how-to-use-in-javascript)
-- [Extends](https://github.com/LZ9/JsBridgeKt#extends)
+- [1、How to dependencies](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md#1how-to-dependencies)
+- [2、How to use in Android](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md#2how-to-use-in-android)
+- [3、How to use in JavaScript](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md#3how-to-use-in-javascript)
+- [Extends](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md#extends)
 
 ## 1、How to dependencies
 Please add mavenCentral() dependencies, because jcenter() is deprecated
@@ -105,7 +105,7 @@ The Instructions of H5 can refer to the [JsBridge.js](https://github.com/LZ9/JsB
 
 ## Extends
 - [Update record](https://github.com/LZ9/JsBridgeKt/blob/master/jsbridgekt/readme_update.md)
-- [Back to the top](https://github.com/LZ9/JsBridgeKt#jsbridgekt)
+- [Back to the top](https://github.com/LZ9/JsBridgeKt/blob/master/README_ENG.md#jsbridgekt)
 
 ## License
 - [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)

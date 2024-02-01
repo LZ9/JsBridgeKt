@@ -29,11 +29,10 @@ android {
 
     //日志开关
     def LOG_DEBUG = "LOG_DEBUG"
-    defaultConfig {
-        buildConfigField "boolean", LOG_DEBUG, "true"
-    }
 
-    // 程序在编译的时候会检查lint，有任何错误提示会停止build，我们可以关闭这个开关
+    buildFeatures {
+        buildConfig = true
+    }
 
     buildTypes {
 
@@ -53,6 +52,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // 程序在编译的时候会检查lint，有任何错误提示会停止build，我们可以关闭这个开关
     lint {
         abortOnError false
         checkReleaseBuilds false
